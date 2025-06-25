@@ -128,20 +128,22 @@ for epoch in range(0, num_epoch):
 
         ##### 課題1(c) 順伝播 (訓練データ版, テストデータ版もあるので注意)
 
+        activation = ReLU
+
         ## 入力層(第0層)から第1層へ
-        z1, u1 = forward(z0, W0, ReLU) 
+        z1, u1 = forward(z0, W0, activation) 
 
         ## 第1層から第2層へ
-        z2, u2 = forward(z1, W1, ReLU)
+        z2, u2 = forward(z1, W1, activation)
 
         ## 第2層から第3層へ
-        z3, u3 = forward(z2, W2, ReLU)
+        z3, u3 = forward(z2, W2, activation)
         
         ## 第3層から第4層へ
-        z4, u4 = forward(z3, W3, ReLU)
+        z4, u4 = forward(z3, W3, activation)
 
         ## 第4層から第5層へ
-        z5, u5 = forward(z4, W4, ReLU)
+        z5, u5 = forward(z4, W4, activation)
 
         ## 第5層から出力層(第5層)へ
         g = softmax(np.dot(W5, z5)) # softmaxを定義したらコメント外す
