@@ -199,7 +199,9 @@ for epoch in range(0, num_epoch):
         ##### テスト誤差: 誤差をe_testに保存
         e_test[j] = CrossEntoropy(prob[j,:], yi) # CorssEntropyを定義したらコメント外す
 
-        ##### 課題1(c) テスト版 ここまで        
+        ##### 課題1(c) テスト版 ここまで   
+
+        accuracy_list = []     
 
     error_test.append(sum(e_test)/n_test)
     e_test = []
@@ -207,7 +209,10 @@ for epoch in range(0, num_epoch):
         predict_label = np.argmax(prob, axis=1)
         true_label = np.argmax(y_test, axis=1)
         accuracy = np.mean(predict_label == true_label)
-        print(f"Test Accuracy at epoch {epoch}: {accuracy:.4f}")
+        accuracy_list.append(accuracy)
+
+        if epoch % 10 == 0 or epoch == num_epoch - 1:
+            print(f"Test Accuracy at epoch {epoch}: {accuracy:.4f}")
 
 ########## 誤差関数のプロット
 plt.clf()
@@ -228,6 +233,16 @@ true_label = np.argmax(y_test, axis=1)
 
 
 ConfMat = np.zeros((m, m))
+
+# Accuracy plot
+plt.clf()
+plt.plot(accuracy_list, label="test accuracy", lw=3, color="green")
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy")
+plt.ylim(0, 1)
+plt.grid()
+plt.legend(fontsize=16)
+plt.savefig("./accuracy.pdf", bbox_inches='tight', transparent=True)
 
 #### 課題2
 # ここでConfMatの各要素を計算
