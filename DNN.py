@@ -203,6 +203,11 @@ for epoch in range(0, num_epoch):
 
     error_test.append(sum(e_test)/n_test)
     e_test = []
+     if epoch % 10 == 0 or epoch == num_epoch - 1:
+        predict_label = np.argmax(prob, axis=1)
+        true_label = np.argmax(y_test, axis=1)
+        accuracy = np.mean(predict_label == true_label)
+        print(f"Test Accuracy at epoch {epoch}: {accuracy:.4f}")
 
 ########## 誤差関数のプロット
 plt.clf()
