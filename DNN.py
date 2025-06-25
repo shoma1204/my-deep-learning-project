@@ -156,7 +156,7 @@ for epoch in range(0, num_epoch):
         if epoch == 0:
             continue
 
-        eta_t = eta/epoch 
+        eta_t = eta/(1 + 0.05 * epoch) 
         
         ##### 課題1(d) 逆伝播
 
